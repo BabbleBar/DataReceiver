@@ -3,15 +3,15 @@ language: python
 python: 2.7
 
 # command to install dependencies
-install: 
-   - "pip install -r requirements.txt"
+install: "pip install -r requirements.txt"
+
+script: false
 
 deploy:
   provider: cloudfoundry
-  target: https://receiver.scapp.io
+  target: https://api.lyra-836.appcloud.swisscom.com
   username: michael.voser@gmail.com
   password:
     secure: your encryped password determined by the travis gem=
   organization: BabbleBar
   space: DEV
-
