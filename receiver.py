@@ -1,8 +1,9 @@
-from flask import Flask, request
-import os
-import pika
 import json
+import os
+
+import pika
 import xmltodict
+from flask import Flask, request
 
 app = Flask(__name__)
 
