@@ -1,15 +1,15 @@
 from flask import Flask, request
 import os
-import sys
 import pika
 import json
+import xmltodict
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/ping")
 def hello():
-    return "Hello World!"
+    return "pong"
 
 
 def get_pika_params():
@@ -29,11 +29,13 @@ def cb():
 
     print("New Infos -- DevEui: %s / FPort: %s / Infos: %s" % (LrnDevEui, LrnFPort, LrnInfos))
     data = request.get_data(as_text=True)
-    print(data)
+    dict_data = xmltodict.parse(data)
+    json_data = json.dumps(dict_data)
+    print(json_data)
 
     channel.basic_publish(exchange='data_log',
                           routing_key='',
-                          body=data)
+                          body=json_data)
 
     return "processed"
 
