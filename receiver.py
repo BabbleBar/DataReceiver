@@ -64,6 +64,8 @@ def cb():
 
     if dict_data['FPort'] == '3':
         send_value(dict_data, 'lum')
+    else:
+        print("Unknown port: %s" % dict_data['FPort'])
 
     return "processed"
 
