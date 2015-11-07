@@ -5,7 +5,8 @@ python: 2.7
 # command to install dependencies
 install: "pip install -r requirements.txt"
 
-script: false
+# command to run tests
+script: nosetests
 
 deploy:
   provider: cloudfoundry
