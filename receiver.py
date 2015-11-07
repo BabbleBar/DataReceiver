@@ -14,9 +14,9 @@ def hello():
 
 def get_pika_params():
     if 'VCAP_SERVICES' in os.environ:
-        VCAP_SERVICES = json.loads(os.environ['VCAP_SERVICES'])
+        vcap_services = json.loads(os.environ['VCAP_SERVICES'])
 
-        return pika.URLParameters(url=VCAP_SERVICES['rabbitmq'][0]['credentials']['uri'])
+        return pika.URLParameters(url=vcap_services['rabbitmq'][0]['credentials']['uri'])
 
     return pika.ConnectionParameters(host="localhost")
 
@@ -42,8 +42,9 @@ def cb():
 
 port = os.getenv('VCAP_APP_PORT', '5000')
 
+connection = pika.BlockingConnection(get_pika_params())
+channel = connection.channel()
+channel.exchange_declare(exchange='data_log', type='fanout')
+
 if __name__ == "__main__":
-    connection = pika.BlockingConnection(get_pika_params())
-    channel = connection.channel()
-    channel.exchange_declare(exchange='data_log', type='fanout')
     app.run(host='0.0.0.0', port=int(port), debug=True)
