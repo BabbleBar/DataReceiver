@@ -1,11 +1,1 @@
 python: 2.7
-install: pip install -r requirements.txt
-script: nosetests
-deploy:
-  provider: cloudfoundry
-  api: https://api.lyra-836.appcloud.swisscom.com
-  username: michael.voser@gmail.com
-  password:
-    secure: GSNQ8EF82xkGhpO3jev05Zn0n2AN2qR8xKSLclvbUr1uDr7AHTmGQGcPEMD6QbdRtF/7iWYYYVGlNSUUAQaKp4SbocRKf67Xd4owxnEXELaHnIM4x4bkdTp+uIiIKz75EoIoNS3bDyP+SNkKzJ3velxvb+2ZDzFftrop74sx2+ADZvFv7zWrgEddG/W3e7xwt7LJTYXOgOsdljx2px+FhRRHmuHDLykJx6ZXNDkgNrdhLb4a2fxEUAWgp42MGCfcbrrW73G3y/ydASnRVg8jZYcpeujPJxKqoF1ZWkG81HXFdg7mY34wQju0nvPqYW4OgNTVO/CPn/cfkULC/U+7erY+COsYrMH6cVRT10TXbV7v7lTK6evaNRqBABH2LqySnu6YqfCkvr2mpwuPupsg46mSKkl2aPOeEcpIDUkY5n6SBd8uwDqb129//hi/8PdUBNVN1JaP+i3azXMSeyE6HP7FANemYmR3UtK6xUPOI5PaDjB+07vfeozumwCPRJUeqB5TuZPorkTJoIU5vablFGtIxk5XosMdAQWVkrUQmLoNeC7vfrFo5a+D2H8GSJo9k0eMUVWNrNAbRK/4ynECWddY3sldBtC/enIWlbEBPLkrahjSfp9MMFrgz3opvSwg8Y7UTNnN5AGpqNgm/q4KQyQuV1y7OHGYn8tiGAHBdHI=
-  organization: BabbleBar
-  space: DEV
