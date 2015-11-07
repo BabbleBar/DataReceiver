@@ -30,7 +30,7 @@ def cb():
     print("New Infos -- DevEui: %s / FPort: %s / Infos: %s" % (LrnDevEui, LrnFPort, LrnInfos))
     data = request.get_data(as_text=True)
     dict_data = xmltodict.parse(data)
-    json_data = json.dumps(dict_data)
+    json_data = json.dumps(dict_data['DevEUI_uplink'], indent=4, separators=(',', ': '))
     print(json_data)
 
     channel.basic_publish(exchange='data_log',
