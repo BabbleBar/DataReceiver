@@ -1,5 +1,4 @@
 python: 2.7
-script: nosetests
 deploy:
   provider: cloudfoundry
   api: https://api.lyra-836.appcloud.swisscom.com
