@@ -47,4 +47,4 @@ channel = connection.channel()
 channel.exchange_declare(exchange='data_log', type='fanout')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(port), debug=True)
+    app.run(host='0.0.0.0', port=int(port))
