@@ -10,3 +10,4 @@ deploy:
     secure: newpassword
   organization: BabbleBar
   space: DEV
+  appname: receiver
