@@ -40,11 +40,10 @@ def cb():
     return "processed"
 
 
-port = os.getenv('VCAP_APP_PORT', '5000')
-
-connection = pika.BlockingConnection(get_pika_params())
-channel = connection.channel()
-channel.exchange_declare(exchange='data_log', type='fanout')
-
 if __name__ == "__main__":
+    port = os.getenv('VCAP_APP_PORT', '5000')
+
+    connection = pika.BlockingConnection(get_pika_params())
+    channel = connection.channel()
+    channel.exchange_declare(exchange='data_log', type='fanout')
     app.run(host='0.0.0.0', port=int(port))
