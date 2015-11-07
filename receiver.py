@@ -1,10 +1,12 @@
 import json
 import os
+import sys
+import traceback
 
 import pika
 import xmltodict
-from dateutil.parser import parse
 from flask import Flask, request
+
 
 app = Flask(__name__)
 
@@ -27,10 +29,9 @@ def parse_value(data, data_type):
     return {
         'eui': data['DevEUI'],
         'data_type': data_type,
-        'timestamp': parse(data['Time']),
+        'timestamp': data['Time'],
         'payload_hex': data['payload_hex'],
         'payload_int': int(data['payload_hex'], 16),
-        'payload_float': float(data['payload_hex'], 16),
         'lat': float(data['LrrLAT']),
         'lon': float(data['LrrLON']),
     }
@@ -54,18 +55,22 @@ def cb():
 
     print("New Infos -- DevEui: %s / FPort: %s / Infos: %s" % (LrnDevEui, LrnFPort, LrnInfos))
     data = request.get_data(as_text=True)
-    dict_data = xmltodict.parse(data)
-    json_data = json.dumps(dict_data['DevEUI_uplink'], indent=4, separators=(',', ': '))
-    print(json_data)
+    dict_data = xmltodict.parse(data)['DevEUI_uplink']
+    json_data = json.dumps(dict_data, indent=4, separators=(',', ': '))
 
     channel_log.basic_publish(exchange='data_log',
                               routing_key='',
                               body=json_data)
-
-    if dict_data['FPort'] == '3':
-        send_value(dict_data, 'lum')
-    else:
-        print("Unknown port: %s" % dict_data['FPort'])
+    try:
+        if LrnFPort == '3':
+            send_value(dict_data, 'lum')
+        else:
+            print("Unknown port: %s" % LrnFPort)
+    except:
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        traceback.print_exception(exc_type, exc_value, exc_traceback,
+                                  limit=2, file=sys.stdout)
+        raise
 
     return "processed"
 

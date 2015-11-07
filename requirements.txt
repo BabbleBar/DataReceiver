@@ -1,4 +1,3 @@
 flask
 pika
 xmltodict
-python-dateutil
