@@ -64,6 +64,8 @@ def cb():
     try:
         if LrnFPort == '3':
             send_value(dict_data, 'lum')
+        elif LrnFPort == '4':
+            send_value(dict_data, 'spl')
         else:
             print("Unknown port: %s" % LrnFPort)
     except:
